@@ -77,7 +77,7 @@ if __name__ == "__main__":
     model.to(device)
 
     # Load the data as tensors
-    dataloader = DataTensorLoader(model.tokenizer, subset='cs-en', lang_flip=True, arch='T5')
+    dataloader = DataTensorLoader(model.tokenizer, subset=args.subset, lang_flip=True, arch=args.arch)
     input_ids, input_mask, output_ids = dataloader.get_train()
 
     # Use dataloader to handle batches

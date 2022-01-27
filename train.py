@@ -62,10 +62,12 @@ if __name__ == "__main__":
     set_seeds(args.seed)
 
     # Save the command run
+    text = ' '.join(sys.argv)+'\n'
     if not os.path.isdir('CMDs'):
         os.mkdir('CMDs')
     with open('CMDs/train.cmd', 'a') as f:
-        f.write(' '.join(sys.argv)+'\n')
+        f.write(text)
+    print(text)
 
     # Get the device
     device = get_default_device()

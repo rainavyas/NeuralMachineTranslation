@@ -21,7 +21,7 @@ class DataTensorLoader():
             self.target = langs[1]
         self._get_prefix()
 
-    def _get_data(self, data):
+    def _get_data(self, data, return_sentences=False):
         source_sentences = [item['translation'][self.source] for item in data]
         target_sentences = [item['translation'][self.target] for item in data]
 
@@ -38,6 +38,8 @@ class DataTensorLoader():
         mask = encoded_inputs['attention_mask']
         output_ids[mask==0] = -100
 
+        if return_sentences:
+            return input_ids, input_mask, output_ids, source_sentences, target_sentences
         return input_ids, input_mask, output_ids
     
     def _get_prefix(self):
@@ -53,13 +55,14 @@ class DataTensorLoader():
         }
         self.prefix = f'translate {code_to_lang[self.source]} to {code_to_lang[self.target]}: '
         
-    def get_train(self):
-        return self._get_data(self.dataset['train'])
+    def get_train(self, return_sentences=False):
+        return self._get_data(self.dataset['train'], return_sentences=return_sentences)
 
-    def get_validation(self):
-        return self._get_data(self.dataset['validation'])
+    def get_validation(self, return_sentences=False):
+        return self._get_data(self.dataset['validation'], return_sentences=return_sentences)
     
-    def get_test(self):
-        return self._get_data(self.dataset['test'])
+    def get_test(self, return_sentences=False):
+        return self._get_data(self.dataset['test'], return_sentences=return_sentences)
+    
         
 

@@ -10,6 +10,7 @@ class DataTensorLoader():
         self.tokenizer = tokenizer
         self.arch = arch
         self.dataset = load_dataset('wmt18', subset)
+        self.max_len = 512
 
         langs = subset.split('-')
         if lang_flip:

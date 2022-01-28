@@ -47,7 +47,8 @@ class DataTensorLoader():
             'fi' : 'Finnish',
             'ru' : 'Russian',
             'tr' : 'Turkish',
-            'zh' : 'Chinese'
+            'zh' : 'Chinese',
+            'cs' : 'Czech'
         }
         self.prefix = f'translate {code_to_lang[self.source]} to {code_to_lang[self.target]}: '
         

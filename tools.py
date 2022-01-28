@@ -25,6 +25,6 @@ class AverageMeter(object):
         self.count += n
         self.avg = self.sum / self.count
     
-    def set_seeds(seed):
-        torch.manual_seed(seed)
-        torch.cuda.manual_seed_all(seed)
+def set_seeds(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)

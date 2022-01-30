@@ -31,13 +31,12 @@ class DataTensorLoader():
             source_sentences.append(item['translation'][self.source])
             target_sentences.append(item['translation'][self.target])
 
-        print(source_sentences)
-
         if num_points != -1:
             source_sentences = source_sentences[:num_points]
             target_sentences = target_sentences[:num_points]
 
         source_sentences = [self.prefix+sen for sen in source_sentences]
+        print(source_sentences)
         print('About to tokenize source')
 
         # prep input tensors - source

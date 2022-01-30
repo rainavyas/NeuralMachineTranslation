@@ -28,12 +28,10 @@ class DataTensorLoader():
         target_sentences = []
         for num in range(num_points):
             item = data[num]
-            print(item['translation'][self.source])
             source_sentences.append(item['translation'][self.source])
             target_sentences.append(item['translation'][self.target])
 
-        # source_sentences = [item['translation'][self.source] for item in data)]
-        # target_sentences = [item['translation'][self.target] for item in data]
+        print(source_sentences)
 
         if num_points != -1:
             source_sentences = source_sentences[:num_points]

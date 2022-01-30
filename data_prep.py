@@ -22,19 +22,20 @@ class DataTensorLoader():
         self._get_prefix()
 
     def _get_data(self, data, return_sentences=False, num_points=-1):
+
+        if num_points != -1:
+            data = data[:num_points]
         source_sentences = [item['translation'][self.source] for item in data]
         target_sentences = [item['translation'][self.target] for item in data]
 
-        if num_points != -1:
-            source_sentences = source_sentences[:num_points]
-            target_sentences = target_sentences[:num_points]
-
         source_sentences = [self.prefix+sen for sen in source_sentences]
+        print('About to tokenize source')
 
         # prep input tensors - source
         encoded_inputs = self.tokenizer(source_sentences, max_length=self.max_len, padding='max_length', truncation=True, return_tensors="pt")
         input_ids = encoded_inputs['input_ids']
         input_mask = encoded_inputs['attention_mask']
+        print('About to tokenizer target')
 
         # prep output tensors - target -> use '-100' for masked positions (T5)
         encoded_inputs = self.tokenizer(target_sentences, max_length=self.max_len, padding='max_length', truncation=True, return_tensors="pt")

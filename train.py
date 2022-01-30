@@ -81,27 +81,27 @@ if __name__ == "__main__":
     dataloader = DataTensorLoader(model.tokenizer, subset=args.subset, lang_flip=True, arch=args.arch)
     input_ids, input_mask, output_ids = dataloader.get_train(num_points=args.num_points)
 
-    # # Use dataloader to handle batches
-    # train_ds = TensorDataset(input_ids, input_mask, output_ids)
-    # train_dl = DataLoader(train_ds, batch_size=args.B, shuffle=True)
+    # Use dataloader to handle batches
+    train_ds = TensorDataset(input_ids, input_mask, output_ids)
+    train_dl = DataLoader(train_ds, batch_size=args.B, shuffle=True)
 
-    # # Optimizer
-    # optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, eps=1e-8)
+    # Optimizer
+    optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, eps=1e-8)
 
-    # # Scheduler
-    # scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[args.sch])
+    # Scheduler
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, milestones=[args.sch])
 
-    # # loss from output - criterion is wrapped inside model
-    # loss_from_output = lambda a: a[0]
+    # loss from output - criterion is wrapped inside model
+    loss_from_output = lambda a: a[0]
 
-    # # Train
-    # for epoch in range(args.epochs):
+    # Train
+    for epoch in range(args.epochs):
 
-    #     # train for one epoch
-    #     print('current lr {:.5e}'.format(optimizer.param_groups[0]['lr']))
-    #     train(train_dl, model, loss_from_output, optimizer, epoch, device)
-    #     scheduler.step()
+        # train for one epoch
+        print('current lr {:.5e}'.format(optimizer.param_groups[0]['lr']))
+        train(train_dl, model, loss_from_output, optimizer, epoch, device)
+        scheduler.step()
 
-    # # Save the trained model
-    # state = model.state_dict()
-    # torch.save(state, args.OUT)
+    # Save the trained model
+    state = model.state_dict()
+    torch.save(state, args.OUT)

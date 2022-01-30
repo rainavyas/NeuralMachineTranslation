@@ -22,12 +22,13 @@ class DataTensorLoader():
         self._get_prefix()
 
     def _get_data(self, data, return_sentences=False, num_points=-1):
-        print(type(data))
-        if num_points != -1:
-            data = data[:num_points]
-            print(data[0], len(data))
+
         source_sentences = [item['translation'][self.source] for item in data]
         target_sentences = [item['translation'][self.target] for item in data]
+
+        if num_points != -1:
+            source_sentences = source_sentences[:num_points]
+            target_sentences = target_sentences[:num_points]
 
         source_sentences = [self.prefix+sen for sen in source_sentences]
         print('About to tokenize source')

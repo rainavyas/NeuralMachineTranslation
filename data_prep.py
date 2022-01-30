@@ -36,7 +36,7 @@ class DataTensorLoader():
             target_sentences = target_sentences[:num_points]
 
         source_sentences = [self.prefix+sen for sen in source_sentences]
-        print(source_sentences)
+        print(target_sentences)
         print('About to tokenize source')
 
         # prep input tensors - source

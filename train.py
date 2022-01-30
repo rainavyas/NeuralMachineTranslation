@@ -57,6 +57,7 @@ if __name__ == "__main__":
     commandLineParser.add_argument('--lr', type=float, default=0.000001, help="Specify learning rate")
     commandLineParser.add_argument('--sch', type=int, default=10, help="Specify scheduler rate")
     commandLineParser.add_argument('--seed', type=int, default=1, help="Specify seed")
+    commandLineParser.add_argument('--num_points', type=int, default=-1, help="limit number of datapoints for debugging")
     args = commandLineParser.parse_args()
 
     set_seeds(args.seed)
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 
     # Load the data as tensors
     dataloader = DataTensorLoader(model.tokenizer, subset=args.subset, lang_flip=True, arch=args.arch)
-    input_ids, input_mask, output_ids = dataloader.get_train()
+    input_ids, input_mask, output_ids = dataloader.get_train(num_points=args.num_points)
 
     # Use dataloader to handle batches
     train_ds = TensorDataset(input_ids, input_mask, output_ids)

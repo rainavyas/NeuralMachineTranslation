@@ -21,9 +21,13 @@ class DataTensorLoader():
             self.target = langs[1]
         self._get_prefix()
 
-    def _get_data(self, data, return_sentences=False):
+    def _get_data(self, data, return_sentences=False, num_points=-1):
         source_sentences = [item['translation'][self.source] for item in data]
         target_sentences = [item['translation'][self.target] for item in data]
+
+        if num_points != -1:
+            source_sentences = source_sentences[:num_points]
+            target_sentences = target_sentences[:num_points]
 
         source_sentences = [self.prefix+sen for sen in source_sentences]
 
@@ -55,14 +59,14 @@ class DataTensorLoader():
         }
         self.prefix = f'translate {code_to_lang[self.source]} to {code_to_lang[self.target]}: '
         
-    def get_train(self, return_sentences=False):
-        return self._get_data(self.dataset['train'], return_sentences=return_sentences)
+    def get_train(self, return_sentences=False, num_points=-1):
+        return self._get_data(self.dataset['train'], return_sentences=return_sentences, num_points=num_points)
 
-    def get_validation(self, return_sentences=False):
-        return self._get_data(self.dataset['validation'], return_sentences=return_sentences)
+    def get_validation(self, return_sentences=False, num_points=-1):
+        return self._get_data(self.dataset['validation'], return_sentences=return_sentences, num_points=num_points)
     
-    def get_test(self, return_sentences=False):
-        return self._get_data(self.dataset['test'], return_sentences=return_sentences)
+    def get_test(self, return_sentences=False, num_points=-1):
+        return self._get_data(self.dataset['test'], return_sentences=return_sentences, num_points=num_points)
     
         
 

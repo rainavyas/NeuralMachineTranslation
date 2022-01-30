@@ -22,7 +22,7 @@ class DataTensorLoader():
         self._get_prefix()
 
     def _get_data(self, data, return_sentences=False, num_points=-1):
-
+        print(type(data))
         if num_points != -1:
             data = data[:num_points]
             print(data[0], len(data))

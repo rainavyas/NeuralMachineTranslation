@@ -2,6 +2,7 @@
 Prepare WMT18 data as tensors
 '''
 
+from numpy import source
 import torch
 from datasets import load_dataset
 
@@ -23,13 +24,8 @@ class DataTensorLoader():
 
     def _get_data(self, data, return_sentences=False, num_points=-1):
 
-        if num_points == -1: num_points = len(data)
-        source_sentences = []
-        target_sentences = []
-        for num in range(num_points):
-            item = data[num]
-            source_sentences.append(item['translation'][self.source])
-            target_sentences.append(item['translation'][self.target])
+        source_sentences = [item[self.source] for item in data]
+        target_sentences = [item[self.source] for item in data]
 
         if num_points != -1:
             source_sentences = source_sentences[:num_points]
@@ -69,13 +65,13 @@ class DataTensorLoader():
         self.prefix = f'translate {code_to_lang[self.source]} to {code_to_lang[self.target]}: '
         
     def get_train(self, return_sentences=False, num_points=-1):
-        return self._get_data(self.dataset['train'], return_sentences=return_sentences, num_points=num_points)
+        return self._get_data(self.dataset['train']['translation'], return_sentences=return_sentences, num_points=num_points)
 
     def get_validation(self, return_sentences=False, num_points=-1):
-        return self._get_data(self.dataset['validation'], return_sentences=return_sentences, num_points=num_points)
+        return self._get_data(self.dataset['validation']['translation'], return_sentences=return_sentences, num_points=num_points)
     
     def get_test(self, return_sentences=False, num_points=-1):
-        return self._get_data(self.dataset['test'], return_sentences=return_sentences, num_points=num_points)
+        return self._get_data(self.dataset['test']['translation'], return_sentences=return_sentences, num_points=num_points)
     
         
 

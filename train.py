@@ -12,7 +12,7 @@ from tools import AverageMeter, get_default_device, set_seeds
 from models import T5Based
 from torch.utils.data import TensorDataset, DataLoader
 
-def train(train_loader, model, output_to_loss, optimizer, epoch, device, print_freq=5):
+def train(train_loader, model, output_to_loss, optimizer, epoch, device, print_freq=50):
     '''
     Run one train epoch
     '''

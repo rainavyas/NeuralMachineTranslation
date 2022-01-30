@@ -38,7 +38,7 @@ class DataTensorLoader():
         encoded_inputs = self.tokenizer(source_sentences, max_length=self.max_len, padding='max_length', truncation=True, return_tensors="pt")
         input_ids = encoded_inputs['input_ids']
         input_mask = encoded_inputs['attention_mask']
-        print('About to tokenizer target')
+        print('About to tokenize target')
 
         # prep output tensors - target -> use '-100' for masked positions (T5)
         encoded_inputs = self.tokenizer(target_sentences, max_length=self.max_len, padding='max_length', truncation=True, return_tensors="pt")

@@ -27,4 +27,4 @@ python3.7 and above
 
 ## Install with PyPI
 
-`pip install datasets transformers torch`
+`pip install datasets transformers torch sentencepiece`

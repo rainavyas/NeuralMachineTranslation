@@ -25,6 +25,7 @@ class DataTensorLoader():
 
         if num_points != -1:
             data = data[:num_points]
+            print(data[0], len(data))
         source_sentences = [item['translation'][self.source] for item in data]
         target_sentences = [item['translation'][self.target] for item in data]
 

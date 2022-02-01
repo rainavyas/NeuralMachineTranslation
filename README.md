@@ -17,7 +17,7 @@ This work uses the [WMT18 dataset](https://www.statmt.org/wmt18/). This supports
 # Model Architectures
 
 The following model architectures are supported:
- - [T5](https://huggingface.co/docs/transformers/model_doc/t5)
+ - [MT5](https://huggingface.co/docs/transformers/model_doc/mt5)
  - [BART](https://huggingface.co/docs/transformers/model_doc/bart)
  - RNN-based
 

@@ -51,7 +51,7 @@ if __name__ == "__main__":
     commandLineParser.add_argument('OUT', type=str, help='Specify output th file')
     commandLineParser.add_argument('--subset', type=str, default='cs-en', help="Specify translation")
     commandLineParser.add_argument('--arch', type=str, default='T5', help="Specify model architecture")
-    commandLineParser.add_argument('--size', type=str, default='t5-base', help="Specify model size")
+    commandLineParser.add_argument('--size', type=str, default='google/mt5-base', help="Specify model size")
     commandLineParser.add_argument('--B', type=int, default=16, help="Specify batch size")
     commandLineParser.add_argument('--epochs', type=int, default=2, help="Specify epochs")
     commandLineParser.add_argument('--lr', type=float, default=0.000001, help="Specify learning rate")

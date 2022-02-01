@@ -11,7 +11,7 @@ class DataTensorLoader():
         self.tokenizer = tokenizer
         self.arch = arch
         self.dataset = load_dataset('wmt18', subset)
-        self.max_len = 512
+        self.max_len = 256
 
         langs = subset.split('-')
         if lang_flip:
@@ -20,7 +20,7 @@ class DataTensorLoader():
         else:
             self.source = langs[0]
             self.target = langs[1]
-        self._get_prefix()
+        # self._get_prefix()
 
     def _get_data(self, data, return_sentences=False, num_points=-1):
 
@@ -31,7 +31,7 @@ class DataTensorLoader():
             source_sentences = source_sentences[:num_points]
             target_sentences = target_sentences[:num_points]
 
-        source_sentences = [self.prefix+sen for sen in source_sentences]
+        # source_sentences = [self.prefix+sen for sen in source_sentences]
         print('About to tokenize source')
 
         # prep input tensors - source
@@ -51,6 +51,9 @@ class DataTensorLoader():
         return input_ids, input_mask, output_ids
     
     def _get_prefix(self):
+        '''
+        Prefix is required for T5 but not for MT5
+        '''
         code_to_lang = {
             'en' : 'English',
             'de' : 'German',
